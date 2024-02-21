@@ -1,14 +1,13 @@
 package four;
 
-import java.util.*;
-import java.util.function.Consumer;
+import javax.swing.*;
+import java.awt.*;
+import java.util.LinkedHashMap;
 
 public class util {
-    public static HashMap<String, String> board = util.mapSetup();
 
     public static void main(String[] args) {
-        board.forEach((key, value) -> System.out.println(key + ": " + value));
-        System.out.println("nerds");
+
     }
 
     public static String toCoOrdinate(int x, int y) {
@@ -18,15 +17,26 @@ public class util {
         return s;
     }
 
-    public static LinkedHashMap<String, String> mapSetup() {
-        LinkedHashMap<String, String> stringMap = new LinkedHashMap<>();
+    public static LinkedHashMap<String, JButton> mapSetup() {
+        LinkedHashMap<String, JButton> map = new LinkedHashMap<>();
         for (int y = 5; y >= 0; y--) {
             for (int x = 0; x < 7; x++) {
-                stringMap.put(toCoOrdinate(x, y), "");
+                JButton button = new JButton(" ");
+                String coOrd = toCoOrdinate(x, y);
+                button.setName("Button".concat(coOrd));
+                button.setFocusPainted(false);
+                button.setForeground(Color.WHITE);
+                button.setFont(new Font("Tahoma", Font.BOLD, 48));
+
+                map.put(toCoOrdinate(x, y), button);
             }
 
         }
-        return stringMap;
+        return map;
+    }
+
+    public static String toKey(int x, int y) {
+        return String.valueOf((char) (65 + x)).concat(String.valueOf(y + 1));
     }
 
     /*public static iterateGrid() */
